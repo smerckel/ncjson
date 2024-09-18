@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 
 [project]
-name = "NC2JSON"
+name = "ncjson"
 authors = [
   { name="Lucas Merckelbach", email="lucas.merckelbach@hereon.de" },
 ]
@@ -32,15 +32,15 @@ license = {text = "MIT License"}
 dynamic = ["version"]
 
 [project.urls]
-Homepage = "https://github.com/smerckel/NC2JSON"
-Issues = "https://github.com/smerckel/NC2JSON/issues"
+Homepage = "https://github.com/smerckel/ncjson"
+Issues = "https://github.com/smerckel/ncjson/issues"
+
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
-
-#[tool.setuptools.dynamic]
-#version = {attr = "glider_profiles.__version__"}
+[tool.setuptools]
+py-modules = ["ncjson"]
 
 [tool.setuptools_scm]
 version_scheme = "guess-next-dev"
