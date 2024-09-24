@@ -15,13 +15,17 @@ jobs:
           command: |
               python3 -m venv venv
               . venv/bin/activate
+	      pip install -U pip
               pip install pip-tools
-              pip install pytest pytest-cov
               pip-compile
               pip-sync
       - run:
           name: Run tests
-          command: pytest --cov=ncjson --cov-report=html
+          command: |
+              python3 -m venv venv
+              . venv/bin/activate
+              pip install pytest pytest-cov
+              pytest --cov=ncjson --cov-report=html
       #- store_test_results:
       #    path: junit.xml
 workflows:

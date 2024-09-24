@@ -23,7 +23,9 @@ dependencies = [
 		"netcdf4",
 		"h5netcdf",
 		"requests",
-		"aiohttp"
+		"aiohttp",
+		"pytest",
+		"pytest-cov"
 ]
 
 license = {text = "MIT License"}
