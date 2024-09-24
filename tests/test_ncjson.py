@@ -7,6 +7,8 @@ Units test of ncjson
 
 import ncjson
 import pytest
+import os
+
 import numpy as np
 
 url = 'https://co.ifremer.fr/co/ego/ego/v2/sea017/sea017_20230613/sea017_20230613_R.nc'
@@ -38,6 +40,13 @@ class TestNcjson():
         writer = ncjson.DStoJSON(url)
         writer.ds.close()
 
+    def test_open_url_context_manager(self):
+        with ncjson.DStoJSON(url) as writer:
+            variables = writer.get_variables()
+            assert len(variables) == 101
+            assert "PLATFORM_TYPE" in variables
+            
+
     def notest_open_file(self):
         # this test seems not to work, althoug a standalone script does read
         # nc files directly.
@@ -68,3 +77,13 @@ class TestNcjson():
         bb = writer.get_bb()
         assert type(bb) is dict
         assert np.isclose(bb["UPPER_RIGHT_LATLON_GPS"][1], 45.4277333333)
+
+    def test_write_json(self, writer):
+        fn = 'test.json'
+        if os.path.exists(fn):
+            os.unlink(fn)
+        with ncjson.DStoJSON(url, json_output_filename=fn) as writer:
+            writer.write_json(write_to_stdout=False)
+        assert os.path.exists(fn)
+        os.unlink(fn)
+        
