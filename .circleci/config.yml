@@ -7,28 +7,24 @@ jobs:
   test-python:
     # Install dependencies and run tests
     docker:
-      - image: cimg/python:3.8-node
+      - image: cimg/python:3.8
     steps:
       - checkout
-      - python/install-packages
+      - run:
+          name: install packages
+	  command: |
+	      python3 -m venv venv
+	      . venv/bin/activate
+	      pip install pip-tools
+	      pip install pytest pytest-cov
+	      pip-compile
+	      pip-sync
       - run:
           name: Run tests
-          command: pytest --junitxml=junit.xml || ((($? == 5)) && echo 'Did not find any tests to run.')
-      - store_test_results:
-          path: junit.xml
-  deploy:
-    # This is an example deploy job, not actually used by the workflow
-    docker:
-      - image: cimg/base:stable
-    steps:
-      # Replace this with steps to deploy to users
-      - run:
-          name: deploy
-          command: '#e.g. ./deploy.sh'
+          command: pytest --cov=ncjson --cov-report=html
+      #- store_test_results:
+      #    path: junit.xml
 workflows:
   build-and-test:
     jobs:
       - test-python
-    # - deploy:
-    #     requires:
-    #       - test-python
