@@ -19,6 +19,7 @@ jobs:
               pip install pip-tools
               pip-compile
               pip-sync
+              pip install .
       - run:
           name: Run tests
           command: |
