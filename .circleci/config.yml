@@ -13,7 +13,7 @@ jobs:
       - run:
           name: install packages
           command: |
-	      python3 -m venv venv
+              python3 -m venv venv
 	      . venv/bin/activate
               pip install pip-tools
               pip install pytest pytest-cov
