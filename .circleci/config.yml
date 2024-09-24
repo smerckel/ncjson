@@ -12,13 +12,13 @@ jobs:
       - checkout
       - run:
           name: install packages
-	  command: |
+          command: |
 	      python3 -m venv venv
 	      . venv/bin/activate
-	      pip install pip-tools
-	      pip install pytest pytest-cov
-	      pip-compile
-	      pip-sync
+              pip install pip-tools
+              pip install pytest pytest-cov
+              pip-compile
+              pip-sync
       - run:
           name: Run tests
           command: pytest --cov=ncjson --cov-report=html
