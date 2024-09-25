@@ -22,7 +22,7 @@ jobs:
             python3 -m venv venv
             . venv/bin/activate
             pip install -U pip
-	    pip install flake8
+            pip install flake8
             pip install .
       # Step 3: run linter and tests
       - run:
