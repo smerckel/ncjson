@@ -1,5 +1,4 @@
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/{smerckel}/{ncjson}/CI?label=build)
-
+[![smerckel](https://circleci.com/gh/smerckel/ncjson.svg?style=svg)](https://github.com/smerckel/ncjson)
 # NetCDF to JSON converter
 
 
