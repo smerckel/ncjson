@@ -1,3 +1,8 @@
+[![](https://circleci.com/gh/smerckel/ncjson.svg?style=svg)](https://github.com/smerckel/ncjson)
+
+
+(https://circleci.com/gh/smerckel/ncjson.svg?style=svg)](https://circleci.com/gh/smerckel/ncjson)
+
 # NetCDF to JSON converter
 
 

@@ -1,35 +1,32 @@
-# This config was automatically generated from your source code
-# Stacks detected: deps:python:.
+# Python CircleCI 2.1 configuration file
 version: 2.1
+
 orbs:
-  python: circleci/python@2
+  python: circleci/python@2.0.3
+
 jobs:
-  test-python:
-    # Install dependencies and run tests
-    docker:
-      - image: cimg/python:3.10
+  build:
+    executor: 
+      name: python/default
+      tag: "3.12"
+
+    working_directory: ~/repo
+
     steps:
+      # Step 1: obtain repo from GitHub
       - checkout
+      # Step 2: create virtual env and install dependencies
       - run:
-          name: install packages
+          name: install dependencies
           command: |
-              python3 -m venv venv
-              . venv/bin/activate
-              pip install -U pip
-              pip install pip-tools
-              pip-compile
-              pip-sync
-              pip install .
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install -U pip
+            pip install pytest pytest-cov
+            pip install .
+      # Step 3: run tests
       - run:
-          name: Run tests
+          name: run tests
           command: |
-              python3 -m venv venv
-              . venv/bin/activate
-              pip install pytest pytest-cov
-              pytest --cov=ncjson --cov-report=html
-      #- store_test_results:
-      #    path: junit.xml
-workflows:
-  build-and-test:
-    jobs:
-      - test-python
+            . venv/bin/activate
+            pytest -v --cov=ncjson --cov-report=html
