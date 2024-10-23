@@ -43,10 +43,9 @@ class TestNcjson():
     def test_open_url_context_manager(self):
         with ncjson.DStoJSON(url) as writer:
             variables = writer.get_variables()
-            assert len(variables) == 101
+            assert len(variables) == 151
             assert "PLATFORM_TYPE" in variables
             
-
     def notest_open_file(self):
         # this test seems not to work, althoug a standalone script does read
         # nc files directly.
@@ -64,7 +63,7 @@ class TestNcjson():
 
     def test_get_variables(self, writer):
         variables = writer.get_variables()
-        assert len(variables) == 101
+        assert len(variables) == 151
         assert "PLATFORM_TYPE" in variables
 
     def test_get_attributes(self, writer):
@@ -86,4 +85,3 @@ class TestNcjson():
             writer.write_json(write_to_stdout=False)
         assert os.path.exists(fn)
         os.unlink(fn)
-        
